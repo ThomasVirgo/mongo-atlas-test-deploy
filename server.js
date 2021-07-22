@@ -11,6 +11,14 @@ server.get('/', (req,res) => {
     res.json('Server is up and running - lovely jubbly!');
 })
 
+server.get('/users', async(req,res) => {
+    try{
+        let data = await User.all;
+        res.status(200).json(data);
+    } catch (error){
+        res.status(500).json('soz couldnt get all users for ya')
+    }
+})
 
 server.post('/users', async (req,res) => {
     try {

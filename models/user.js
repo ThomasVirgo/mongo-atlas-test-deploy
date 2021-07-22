@@ -7,6 +7,18 @@ class User{
         this.age = data.age;
     }
 
+    static get all(){
+        return new Promise (async (resolve, reject) => {
+            try {
+                const db = await init();
+                let userData = await db.collection('users').find().toArray();
+                resolve(userData);
+            } catch (error){
+                reject(error);
+            }
+        })
+    }
+
     static create(data){
         return new Promise (async (resolve, reject) => {
             try {
